@@ -1,0 +1,30 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "gcc build active file",
+            "command": "gcc",
+            "args": [
+                "-g",
+                "${workspaceFolder}\\main.c",
+                "${workspaceFolder}\\huffman_compression.c",
+                "-o",
+                "${workspaceFolder}\\main.exe",
+                "-Wall",
+                "-Wextra",
+                "-std=c99"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
