@@ -9,6 +9,7 @@
                 "-g",
                 "${workspaceFolder}\\main.c",
                 "${workspaceFolder}\\huffman_compression.c",
+                "${workspaceFolder}\\encryption.c",
                 "-o",
                 "${workspaceFolder}\\main.exe",
                 "-Wall",

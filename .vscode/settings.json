@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "huffman_compression.h": "c"
+        "huffman_compression.h": "c",
+        "encryption.h": "c"
     }
 }

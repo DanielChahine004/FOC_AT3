@@ -4,9 +4,6 @@
 #include <string.h>
 
 #define MAX_SYMBOLS 256
-#define IMAGE_DIRECTORY "D:\\Programming\\C\\FOC_AT3\\Captures\\"
-#define CLIENT_DATABASE "D:\\Programming\\C\\FOC_AT3\\ClientDataBase\\"
-#define DECOMPRESSED_DIRECTORY "D:\\Programming\\C\\FOC_AT3\\Decompressed\\"
 #define DEBUG 0
 
 typedef unsigned char byte;
@@ -61,8 +58,24 @@ char* create_full_path(const char* directory, const char* filename) {
 
 
 int compress_image_to_database(const char* image_name) {
+
+    char base_name[241];
+    char output_name[256];
+    
+    // Copy with size limit to ensure space for suffix
+    strncpy(base_name, image_name, sizeof(base_name) - 1);
+    base_name[sizeof(base_name) - 1] = '\0';  // Ensure null termination
+    
+    // Remove .bmp extension
+    size_t len = strlen(base_name);
+    if (len >= 4) {
+        base_name[len - 4] = '\0';
+    }
+    
+    snprintf(output_name, sizeof(output_name), "%s_compressed.bmp", base_name);
+    
     char* inputPath = create_full_path(IMAGE_DIRECTORY, image_name);
-    char* outputPath = create_full_path(CLIENT_DATABASE, image_name);
+    char* outputPath = create_full_path(CLIENT_DATABASE, output_name);
 
     if (!inputPath || !outputPath) {
         free(inputPath);
@@ -90,8 +103,24 @@ int compress_image_to_database(const char* image_name) {
 
 
 int decompress_file_to_decompressed(const char* image_name) {
-    char* inputPath = create_full_path(CLIENT_DATABASE, image_name);
-    char* outputPath = create_full_path(DECOMPRESSED_DIRECTORY, image_name);
+
+    char base_name[239];
+    char output_name[256];
+    
+    // Copy with size limit to ensure space for suffix
+    strncpy(base_name, image_name, sizeof(base_name) - 1);
+    base_name[sizeof(base_name) - 1] = '\0';  // Ensure null termination
+    
+    // Remove .bmp extension
+    size_t len = strlen(base_name);
+    if (len >= 25) {
+        base_name[len - 25] = '\0';
+    }
+    
+    snprintf(output_name, sizeof(output_name), "%s_decompressed.bmp", base_name);
+
+    char* inputPath = create_full_path(COMPRESSED_AND_DECRYPTED_DIRECTORY, image_name);
+    char* outputPath = create_full_path(DECOMPRESSED_DIRECTORY, output_name);
 
     if (!inputPath || !outputPath) {
         free(inputPath);

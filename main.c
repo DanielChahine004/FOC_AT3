@@ -1,4 +1,5 @@
 #include "huffman_compression.h"
+#include "encryption.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -10,6 +11,7 @@
 *******************************************************************************/
 
 
+
 /*******************************************************************************
  * Function prototypes - do NOT change the given prototypes. However you may
  * define your own functions if required.
@@ -17,15 +19,20 @@
 void printLoginMenu(void);
 void printActionMenu(void);
 
+
+
 /*******************************************************************************
  * Main
 *******************************************************************************/
 int main(void){
 
-    printf("Hello World\n");
+    char* key = "110011010101101010100";
+    char* wrong_key = "11010010";
 
-    compress_image_to_database("test.bmp");
-    decompress_file_to_decompressed("test.bmp");
+    compress_image_to_database("green.bmp");
+    encrypt_file_in_database("green_compressed.bmp", key);
+    decrypt_file_from_database("green_compressed_encrypted.bmp", wrong_key);
+    decompress_file_to_decompressed("green_compressed_decrypted.bmp");
 }
 
 void printLoginMenu(void){
